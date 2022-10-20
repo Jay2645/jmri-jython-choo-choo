@@ -31,7 +31,7 @@ Verify your output looks like this:
     My_JMRI_Railroad.jmri/jython
     /home/pi/JMIR/jython
     /home/pi/JMRI/lib/Lib
-    /home/pi/lib/jythong-standalone-2.7.2.jar/Lib
+    /home/pi/lib/jython-standalone-2.7.2.jar/Lib
     __classpath__
     __pyclasspath__/
     /usr/local/lib/python2.7/dist-packages
