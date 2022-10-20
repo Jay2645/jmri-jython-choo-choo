@@ -12,3 +12,28 @@ I have JMRI set to execute the following scripts in order on startup:
 5. print_roster.py (now an empty file I should probably remove... used to print every registered roster entry to the JMRI log)
 6. listen_to_throttles.py (publishes all roster entries to MQTT, binds to their throttles to publish changes to MQTT when I change them in JMRI and to tell JMRI about changes I make via MQTT)
 7. print_fastclock.py (sends Fast Clock time to MQTT so Home Assistant can manage layout lighting based on time of day)
+
+---
+
+I have also added local Python binaries to my Jython install by setting my `JYTHONPATH` environment variable to point at a custom Python 2.7 installation (the Python version that's used by JMRI - yes, it is outdated and no longer supported, but Python 3 doesn't work last I checked). Install Python 2.7 and the Python 2.7 version of `pip`. Then use `pip` to install `paho-mqtt` - I'm running version 1.5.0.
+
+Once that's done, you should update your environment variables. I'm running this on a Raspberry Pi (you absolutely can do this on Windows - just Google "change Windows environment variables" and it should teach you). On Linux, I set this up in my `~/.profile` file to point `JYTHONPATH` at my local Python install:
+
+    export JYTHONPATH="/usr/local/lib/python2.7"
+
+Once set, log out/log in (or reboot) and then double-check where your JMRI is looking for Python modules. You can do that by going into JMRI and running a temporary Jython script with this in it:
+
+    import sys
+    print('\n'.join(sys.path))
+
+Verify your output looks like this:
+
+    My_JMRI_Railroad.jmri/jython
+    /home/pi/JMIR/jython
+    /home/pi/JMRI/lib/Lib
+    /home/pi/lib/jythong-standalone-2.7.2.jar/Lib
+    __classpath__
+    __pyclasspath__/
+    /usr/local/lib/python2.7/dist-packages
+    
+Then you should be good to go!
